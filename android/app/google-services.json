@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "141278385180",
+    "project_id": "taqs-18265",
+    "storage_bucket": "taqs-18265.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:141278385180:android:2bebacec47f65feb36bbd9",
+        "android_client_info": {
+          "package_name": "com.example.taqs"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDwHnGYOejzz4uaMiEi8vbMWw8lQ2lw_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
