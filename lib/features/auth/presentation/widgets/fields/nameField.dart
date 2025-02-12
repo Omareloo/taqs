@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 
-
-
-
-class NameField extends StatefulWidget {
+class NameField extends StatelessWidget {
   final TextEditingController nameController;
-
-
-
 
   const NameField({
     super.key,
@@ -15,23 +9,20 @@ class NameField extends StatefulWidget {
   });
 
   @override
-  State<NameField> createState() => _NameFieldState();
-}
-
-class _NameFieldState extends State<NameField> {
-
-  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Name', style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        )),
-        SizedBox(height: 8,),
+        Text('Name',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            )),
+        SizedBox(
+          height: 8,
+        ),
         TextFormField(
-          controller: widget.nameController,
+          controller: nameController,
           keyboardType: TextInputType.text,
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
@@ -40,9 +31,8 @@ class _NameFieldState extends State<NameField> {
               Icons.person,
             ),
           ),
-          validator: (value)
-          {
-            if(value!.isEmpty) {
+          validator: (value) {
+            if (value!.isEmpty) {
               return 'Name Can\'t be Empty';
             }
             return null;

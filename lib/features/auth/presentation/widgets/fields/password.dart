@@ -45,9 +45,7 @@ class _PasswordFieldState extends State<PasswordField> {
               )),
           validator: (value)
           {
-            if(value!.isNotEmpty) {
-              return PasswordValidator.validatePassword(value) ?  null : 'Password must be correct';
-            } else
+           if(value!.isEmpty)
             {
               return 'Password Can\'t be Empty';
             }

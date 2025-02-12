@@ -30,7 +30,7 @@ static Future<void> _initSharedPref() async {
 
 
   static _authRepoInit() {
-    sl.registerLazySingleton<AuthRepository>(() => FirebaseAuthRepository(sl(),sl()));
+    sl.registerLazySingleton<AuthRepository>(() => FirebaseAuthRepository());
   }
 
 }

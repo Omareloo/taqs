@@ -9,7 +9,7 @@ class LoginCubit extends Cubit<LoginStates> {
   final AuthRepository _authRepository;
 
   LoginCubit(this._authRepository) : super(InitState());
-  static LoginCubit get(context)=>BlocProvider.of(context);
+  static LoginCubit get(BuildContext context)=>context.read<LoginCubit>();
 
   TextEditingController emailController = TextEditingController();
 

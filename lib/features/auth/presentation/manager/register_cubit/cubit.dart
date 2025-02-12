@@ -12,7 +12,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
 
   RegisterCubit(this._authRepository) : super(RegisterInitial());
 
-  static RegisterCubit get(context)=>BlocProvider.of(context);
+  static RegisterCubit get(BuildContext context)=>context.read<RegisterCubit>();
 
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -22,22 +22,33 @@ class RegisterCubit extends Cubit<RegisterStates> {
 
   var formKey = GlobalKey<FormState>();
 
-  void signUp(String email, String password,UserModel userModel) async {
+  void signUp(String email, String password, String name, String phone, String age) async {
     emit(RegisterLoading());
     final user = await _authRepository.createUserWithEmailAndPassword(email, password);
     if(user != null) {
       emit(RegisterSuccess(user as String));
-      saveUser(userModel);
+      sendUser(UserModel(email: email, uId: user.uId, name: name, phone: phone, age: age));
     }
    else {
       emit(RegisterError('Sign up failed'));
     }
   }
-
-  void saveUser(UserModel userModel) {
-    emit(SavedUser(userModel));
+  void sendUser(UserModel userModel) async {
+    await _authRepository.saveUser(userModel);
   }
 
+
+  
+  @override
+  Future<void> close() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    phoneController.dispose();
+    ageController.dispose();
+    // TODO: implement close
+    return super.close();
+  }
 
 }
 
