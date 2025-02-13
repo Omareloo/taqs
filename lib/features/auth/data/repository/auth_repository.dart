@@ -1,8 +1,14 @@
-import 'package:taqs/features/auth/data/models/user_model.dart';
 
+import '../../domain/entities/auth_user.dart';
+import '../models/user_model.dart';
 
 abstract class AuthRepository {
-  Future<UserModel?> signInWithEmailAndPassword(String email, String password);
-  Future<UserModel?> createUserWithEmailAndPassword(String email, String password);
-  Future<void> saveUser(UserModel userModel);
+  Future<AuthUser?> signInWithEmailAndPassword(String email, String password);
+  Future<AuthUser?> signUpWithEmailAndPasswordAndInfo({
+    required String email,
+    required String password,
+    required String name,
+    required String phone,
+    required int age,
+  });
 }

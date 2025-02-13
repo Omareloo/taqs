@@ -73,15 +73,19 @@ class RegisterScreen extends StatelessWidget {
                     SizedBox(
                       height: 16,
                     ),
-                    DefaultButton(
+                    state is RegisterLoading
+                        ? Center(child: CircularProgressIndicator())
+                        : DefaultButton(
                         onPressed: () {
                           if (registerCubit.formKey.currentState!.validate()) {
-                            registerCubit.signUp(registerCubit.emailController.text,registerCubit.passwordController.text,  registerCubit.nameController.text, registerCubit.phoneController.text, registerCubit.ageController.text);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomeScreen()));
-                          }
+                            registerCubit.signUp(
+                                registerCubit.emailController.text,
+                                registerCubit.passwordController.text,
+                                registerCubit.nameController.text,
+                                registerCubit.phoneController.text,
+                                registerCubit.ageController.text
+                            );
+                                }
                         },
                         title: 'Register'),
                   ],

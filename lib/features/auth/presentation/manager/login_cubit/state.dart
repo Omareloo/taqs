@@ -1,3 +1,5 @@
+import 'package:taqs/features/auth/domain/entities/auth_user.dart';
+
 abstract class LoginStates{}
 
 class InitState extends LoginStates{}
@@ -5,7 +7,7 @@ class InitState extends LoginStates{}
 class SignInLoading extends LoginStates{}
 
 class SignInSuccess extends LoginStates{
-  final String user;
+  AuthUser user;
 
   SignInSuccess(this.user);
 }

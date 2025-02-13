@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taqs/features/auth/presentation/pages/login_screen.dart';
+import 'package:taqs/onBoarding.dart';
 
 import 'db_injection.dart';
 import 'features/auth/presentation/manager/login_cubit/cubit.dart';
@@ -25,8 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: BlocProvider(
-          create: (context) => LoginCubit(sl()), child: LoginScreen()),
+      home: OnBoardingScreen(),
     );
   }
 }

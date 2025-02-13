@@ -6,7 +6,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text('hello'),
+      body: Center(child: Text('Taqss is in your service',style: TextStyle(
+        fontWeight: FontWeight.bold,
+            fontSize: 24,
+      ),)),
     );
   }
 }

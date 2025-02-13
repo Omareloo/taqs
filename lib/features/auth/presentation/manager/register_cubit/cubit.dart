@@ -1,18 +1,15 @@
+// register_cubit.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:taqs/features/auth/data/models/user_model.dart';
 import 'package:taqs/features/auth/presentation/manager/register_cubit/states.dart';
-
 import '../../../data/repository/auth_repository.dart';
 
 class RegisterCubit extends Cubit<RegisterStates> {
-
   final AuthRepository _authRepository;
-
 
   RegisterCubit(this._authRepository) : super(RegisterInitial());
 
-  static RegisterCubit get(BuildContext context)=>context.read<RegisterCubit>();
+  static RegisterCubit get(BuildContext context) => context.read<RegisterCubit>();
 
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -24,21 +21,19 @@ class RegisterCubit extends Cubit<RegisterStates> {
 
   void signUp(String email, String password, String name, String phone, String age) async {
     emit(RegisterLoading());
-    final user = await _authRepository.createUserWithEmailAndPassword(email, password);
-    if(user != null) {
-      emit(RegisterSuccess(user as String));
-      sendUser(UserModel(email: email, uId: user.uId, name: name, phone: phone, age: age));
-    }
-   else {
-      emit(RegisterError('Sign up failed'));
+    try {
+      final user = await _authRepository.signUpWithEmailAndPasswordAndInfo(
+          email: email, password: password, name: name, phone: phone, age: int.parse(age));
+      if (user != null) {
+        emit(RegisterSuccess());
+      } else {
+        emit(RegisterError('Sign up failed'));
+      }
+    } catch (e) {
+      emit(RegisterError(e.toString()));
     }
   }
-  void sendUser(UserModel userModel) async {
-    await _authRepository.saveUser(userModel);
-  }
 
-
-  
   @override
   Future<void> close() {
     nameController.dispose();
@@ -46,11 +41,6 @@ class RegisterCubit extends Cubit<RegisterStates> {
     passwordController.dispose();
     phoneController.dispose();
     ageController.dispose();
-    // TODO: implement close
     return super.close();
   }
-
 }
-
-
-
