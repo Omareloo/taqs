@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:taqs/config/style/text_styles.dart';
 import 'package:taqs/features/auth/presentation/manager/register_cubit/cubit.dart';
 import 'package:taqs/features/home/home_screen.dart';
 
@@ -30,48 +32,42 @@ class RegisterScreen extends StatelessWidget {
           var registerCubit = RegisterCubit.get(context);
           return Center(
             child: SingleChildScrollView(
-              padding: EdgeInsetsDirectional.only(start: 16, end: 16, top: 16),
+              padding: EdgeInsetsDirectional.only(start: 16.w, end: 16.h, top: 16.h),
               child: Form(
                 autovalidateMode: AutovalidateMode.always,
                 key: registerCubit.formKey,
                 child: Column(
                   children: [
                     Text('Register',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        )),
+                        style: AppTextStyle.font24black700),
                     SizedBox(
-                      height: 8,
+                      height: 8.h,
                     ),
                     Text('Browse with world!',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        )),
+                        style: AppTextStyle.font24black700),
                     SizedBox(
-                      height: 24,
+                      height: 24.h,
                     ),
                     NameField(nameController: registerCubit.nameController),
                     SizedBox(
-                      height: 8,
+                      height: 8.h,
                     ),
                     EmailField(emailController: registerCubit.emailController),
                     SizedBox(
-                      height: 8,
+                      height: 8.h,
                     ),
                     PasswordField(
                         passwordController: registerCubit.passwordController),
                     SizedBox(
-                      height: 8,
+                      height: 8.h,
                     ),
                     PhoneField(phoneController: registerCubit.phoneController),
                     SizedBox(
-                      height: 8,
+                      height: 8.h,
                     ),
                     AgeField(ageController: registerCubit.ageController),
                     SizedBox(
-                      height: 16,
+                      height: 16.h,
                     ),
                     state is RegisterLoading
                         ? Center(child: CircularProgressIndicator())
@@ -87,7 +83,7 @@ class RegisterScreen extends StatelessWidget {
                             );
                                 }
                         },
-                        title: 'Register'),
+                        title: 'Register',),
                   ],
                 ),
               ),

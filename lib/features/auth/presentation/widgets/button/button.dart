@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:taqs/config/style/text_styles.dart';
 
 class DefaultButton extends StatelessWidget {
   final VoidCallback onPressed ;
   final String title;
-  const DefaultButton({Key? key, required this.onPressed, required this.title}) : super(key: key);
+  const DefaultButton({super.key, required this.onPressed, required this.title});
 
 
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 220,
+    return SizedBox(
+      width: 220.w,
       child: ElevatedButton(
           onPressed: onPressed,
         style: ElevatedButton.styleFrom(backgroundColor: Colors.blue,),
-        child: Text(title,style: const TextStyle
-          (
-          color: Colors.white,
-          fontSize: 24,
-          fontWeight: FontWeight.bold) ,),
+        child: Text(title,style: AppTextStyle.font24white700,),
       ),
     );
   }
