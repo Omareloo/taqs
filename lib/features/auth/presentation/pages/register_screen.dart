@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taqs/config/style/text_styles.dart';
 import 'package:taqs/features/auth/presentation/manager/register_cubit/cubit.dart';
-import 'package:taqs/features/home/home_screen.dart';
+import 'package:taqs/features/home/presentation/pages/home_screen.dart';
 
 import '../../../../db_injection.dart';
 import '../manager/register_cubit/states.dart';

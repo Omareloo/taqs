@@ -1,4 +1,4 @@
-// login_cubit.dart
+// app_cubit.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taqs/features/auth/presentation/manager/login_cubit/state.dart';

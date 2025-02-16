@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:taqs/config/style/app_theme.dart';
+import 'package:taqs/features/home/presentation/pages/home_screen.dart';
 import 'package:taqs/onBoarding.dart';
 import 'db_injection.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: appTheme,
-      home: OnBoardingScreen(),
+      home: HomeScreen(),
     );
   }
 }

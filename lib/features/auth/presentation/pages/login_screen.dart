@@ -8,7 +8,7 @@ import 'package:taqs/features/auth/presentation/manager/login_cubit/state.dart';
 import 'package:taqs/features/auth/presentation/pages/register_screen.dart';
 import 'package:taqs/features/auth/presentation/widgets/button/button.dart';
 import '../../../../db_injection.dart';
-import '../../../home/home_screen.dart';
+import '../../../home/presentation/pages/home_screen.dart';
 import '../widgets/fields/email.dart';
 import '../widgets/fields/password.dart';
 
