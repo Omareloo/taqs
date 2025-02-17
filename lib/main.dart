@@ -1,14 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:taqs/config/style/app_theme.dart';
+import 'package:taqs/features/auth/presentation/pages/login_screen.dart';
 import 'package:taqs/features/home/presentation/pages/home_screen.dart';
-import 'package:taqs/onBoarding.dart';
+import 'config/network/dio.dart';
 import 'db_injection.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await DpInjection.init();
+  DioHelper.init();
   runApp(const MyApp());
 }
 
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: appTheme,
-      home: HomeScreen(),
+      home: LoginScreen(),
     );
   }
 }
