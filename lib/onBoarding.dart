@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:taqs/config/extentions/extention.dart';
+import 'package:taqs/config/style/text_styles.dart';
 
 import 'features/auth/presentation/pages/login_screen.dart';
 
@@ -17,7 +19,7 @@ class BoardingModel{
 class OnBoardingScreen extends StatefulWidget {
 
 
-  const OnBoardingScreen({Key? key}) : super(key: key);
+  const OnBoardingScreen({super.key});
 
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
@@ -73,7 +75,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 itemCount: boarding.length,
               ),
             ),
-            const SizedBox(height: 40.0,),
+            40.hs,
             Row(
               children:
               [
@@ -122,18 +124,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 Widget buildBoardingItem(BoardingModel model)=>Column(
   crossAxisAlignment: CrossAxisAlignment.start,
   children: [
-    const SizedBox(height: 30.0,),
+    30.hs,
     Text(model.title,
-      style: const TextStyle(
-          fontSize: 24.0,
-          fontWeight: FontWeight.bold
-      ),),
-    const SizedBox(height: 15.0,),
+      style: AppTextStyle.font24black700),
+    15.hs,
     Text(model.body,
-      style: const TextStyle(
-          fontSize: 14.0,
-          fontWeight: FontWeight.bold
-      ),),
-    const SizedBox(height: 30.0,)
-  ],
+      style: AppTextStyle.font16black700),
+    30.hs  ],
 );
