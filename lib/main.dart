@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:taqs/config/style/app_theme.dart';
 import 'package:taqs/features/auth/presentation/pages/login_screen.dart';
-import 'package:taqs/features/home/presentation/pages/home_screen.dart';
 import 'config/network/dio.dart';
 import 'db_injection.dart';
 

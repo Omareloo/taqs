@@ -29,7 +29,7 @@ class AttributesWidget extends StatelessWidget {
             [
               const Text('Temperature :',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18.0),),
               const SizedBox(height: 8.0,),
-              const Text('25 C',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+              const Text('23 C',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
             ],
           ),
         ),

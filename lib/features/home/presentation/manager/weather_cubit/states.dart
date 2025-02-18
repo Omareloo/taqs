@@ -1,20 +1,19 @@
 import '../../../domain/entities/weather_entity.dart';
 
-abstract class WeatherStates {
-  const WeatherStates();
+abstract class WeatherState {}
+
+class WeatherInitial extends WeatherState {}
+
+class WeatherLoading extends WeatherState {}
+
+class WeatherSuccess extends WeatherState {
+  final WeatherEntity weatherEntity;
+
+  WeatherSuccess(this.weatherEntity);
 }
 
-class WeatherInitial extends WeatherStates {}
+class WeatherFailure extends WeatherState {
+  final String errorMessage;
 
-class WeatherLoading extends WeatherStates {}
-
-class WeatherLoaded extends WeatherStates {
-  final WeatherEntity weather;
-  const WeatherLoaded(this.weather);
-}
-
-class WeatherError extends WeatherStates {
-  final String message;
-
-  const WeatherError(this.message);
+  WeatherFailure(this.errorMessage);
 }

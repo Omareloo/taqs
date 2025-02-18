@@ -1,25 +1,21 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taqs/features/home/presentation/manager/weather_cubit/states.dart';
+
+
 import '../../../domain/use_case/get_weather_usecase.dart';
 
+class WeatherCubit extends Cubit<WeatherState> {
+  final GetWeatherUseCase getWeatherUseCase;
 
-class WeatherCubit extends Cubit<WeatherStates> {
-  final GetWeatherUseCase _getWeatherUseCase;
+  WeatherCubit(this.getWeatherUseCase) : super(WeatherInitial());
 
-  WeatherCubit(this._getWeatherUseCase) : super(WeatherInitial());
-
-  Future<void> getWeatherData(String location) async {
+  Future<void> fetchWeather(String location, int days) async {
     emit(WeatherLoading());
     try {
-      final weather = await _getWeatherUseCase.execute(location);
-      emit(WeatherLoaded(weather));
+      final weatherEntity = await getWeatherUseCase.execute(location, days);
+      emit(WeatherSuccess(weatherEntity));
     } catch (e) {
-      emit(WeatherError('Failed to load weather data'));
+      emit(WeatherFailure(e.toString()));
     }
   }
-  @override
-  Future<void> close() {
-    return super.close();
-  }
-
 }

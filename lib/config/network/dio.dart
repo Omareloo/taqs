@@ -11,7 +11,7 @@ class DioHelper {
         connectTimeout: const Duration(seconds: 60),
         receiveTimeout: const Duration(seconds: 60),
         queryParameters: {
-          'appId': apiKey, // Add API key as a default query parameter
+          'key': apiKey, // Add API key as a default query parameter
         },
       ),
     );

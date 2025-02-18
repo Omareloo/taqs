@@ -9,6 +9,7 @@ import 'package:taqs/features/home/presentation/widgets/inside_screen.dart';
 import '../../../../db_injection.dart';
 
 class HomeScreen extends StatefulWidget {
+
   const HomeScreen({super.key});
 
   @override
@@ -16,6 +17,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  final TextEditingController locationController = TextEditingController();
+
+  @override
+  void dispose() {
+    locationController.dispose();
+    super.dispose();
+  }
 
 
   @override
@@ -33,38 +42,21 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        body: BlocConsumer<WeatherCubit,WeatherStates>(
-          listener: (context,state)
-          {
-            if(state is WeatherError)
-            {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
-            }
-            else if(state is WeatherLoaded)
-            {
-              BlocProvider.of<WeatherCubit>(context).getWeatherData('cairo');
-            }
-            else if(state is WeatherLoading)
-            {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Loading')));
-            }
-          },
-          builder: (context,state){
-            return  Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  DaysWidget(),
-                  SizedBox(height: 32,),
-                  InsideScreen(),
-                  Spacer(),
-                  AttributesWidget()
-                ],
-              ),
-            );
-          }
-        ),
+        body: BlocBuilder<WeatherCubit,WeatherState>(
+          builder: (context,state)=> Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                DaysWidget(),
+                SizedBox(height: 32,),
+                InsideScreen(),
+                Spacer(),
+                AttributesWidget()
+              ],
             ),
+          ),
+        ),
+      ),
     );
   }
 }
