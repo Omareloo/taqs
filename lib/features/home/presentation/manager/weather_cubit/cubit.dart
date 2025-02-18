@@ -7,7 +7,16 @@ import '../../../domain/use_case/get_weather_usecase.dart';
 class WeatherCubit extends Cubit<WeatherState> {
   final GetWeatherUseCase getWeatherUseCase;
 
-  WeatherCubit(this.getWeatherUseCase) : super(WeatherInitial());
+  WeatherCubit(this.getWeatherUseCase) : super(WeatherInitial()){
+    fetchWeather('Cairo', 3);
+  }
+    int _selectedDayIndex = 0;
+    int get selectedDayIndex => _selectedDayIndex;
+    setDayIndex(int index) {
+    _selectedDayIndex=index;
+    emit(state);
+    }
+
 
   Future<void> fetchWeather(String location, int days) async {
     emit(WeatherLoading());

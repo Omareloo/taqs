@@ -1,12 +1,13 @@
+import 'package:taqs/features/home/data/models/weather_model.dart';
+
 import '../../data/repository/app_repository.dart';
-import '../entities/weather_entity.dart';
 
 class GetWeatherUseCase {
   final WeatherRepository repository;
 
   GetWeatherUseCase(this.repository);
 
-  Future<WeatherEntity> execute(String location, int days) {
+  Future<WeatherModel> execute(String location, int days) {
     return repository.getWeatherData(location, days);
   }
 }

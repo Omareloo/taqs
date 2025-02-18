@@ -1,13 +1,16 @@
-import '../../../domain/entities/weather_entity.dart';
+import 'package:taqs/features/home/data/models/weather_model.dart';
+
 
 abstract class WeatherState {}
 
-class WeatherInitial extends WeatherState {}
+class WeatherInitial extends WeatherState {
+
+}
 
 class WeatherLoading extends WeatherState {}
 
 class WeatherSuccess extends WeatherState {
-  final WeatherEntity weatherEntity;
+  final WeatherModel weatherEntity;
 
   WeatherSuccess(this.weatherEntity);
 }

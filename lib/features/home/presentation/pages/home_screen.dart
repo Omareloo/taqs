@@ -4,8 +4,6 @@ import 'package:taqs/features/home/presentation/manager/weather_cubit/cubit.dart
 import 'package:taqs/features/home/presentation/manager/weather_cubit/states.dart';
 import 'package:taqs/features/home/presentation/widgets/attributes_widget.dart';
 import 'package:taqs/features/home/presentation/widgets/days_widget.dart';
-import 'package:taqs/features/home/presentation/widgets/inside_screen.dart';
-
 import '../../../../db_injection.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,6 +17,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   final TextEditingController locationController = TextEditingController();
+
+
 
   @override
   void dispose() {
@@ -47,9 +47,9 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
+                //create dropdown with list of cities
+
                 DaysWidget(),
-                SizedBox(height: 32,),
-                InsideScreen(),
                 Spacer(),
                 AttributesWidget()
               ],

@@ -1,5 +1,6 @@
-import '../../domain/entities/weather_entity.dart';
+import 'package:taqs/features/home/data/models/weather_model.dart';
+
 
 abstract class WeatherRepository {
-  Future<WeatherEntity> getWeatherData(String location, int days);
+  Future<WeatherModel> getWeatherData(String location, int days);
 }
