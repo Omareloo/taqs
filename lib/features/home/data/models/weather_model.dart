@@ -7,12 +7,12 @@ class WeatherModel {
 
   WeatherModel.fromJson(Map<String, dynamic> json) {
     location = json['location'] != null
-        ? new Location.fromJson(json['location'])
+        ? Location.fromJson(json['location'])
         : null;
     current =
-    json['current'] != null ? new Current.fromJson(json['current']) : null;
+    json['current'] != null ? Current.fromJson(json['current']) : null;
     forecast = json['forecast'] != null
-        ? new Forecast.fromJson(json['forecast'])
+        ? Forecast.fromJson(json['forecast'])
         : null;
   }
 
@@ -35,10 +35,10 @@ class Location {
   String? name;
   String? region;
   String? country;
-  double? lat;
-  double? lon;
+  var lat;
+  var lon;
   String? tzId;
-  int? localtimeEpoch;
+  var localtimeEpoch;
   String? localtime;
 
   Location(
@@ -77,35 +77,35 @@ class Location {
 }
 
 class Current {
-  int? lastUpdatedEpoch;
+  var lastUpdatedEpoch;
   String? lastUpdated;
-  double? tempC;
-  double? tempF;
-  int? isDay;
+  var tempC;
+  var tempF;
+  var isDay;
   Condition? condition;
-  double? windMph;
-  double? windKph;
-  int? windDegree;
+  var windMph;
+  var windKph;
+  var windDegree;
   String? windDir;
-  int? pressureMb;
-  double? pressureIn;
-  int? precipMm;
-  int? precipIn;
-  int? humidity;
-  int? cloud;
-  double? feelslikeC;
-  double? feelslikeF;
-  double? windchillC;
-  double? windchillF;
-  double? heatindexC;
-  double? heatindexF;
-  double? dewpointC;
-  double? dewpointF;
-  int? visKm;
-  int? visMiles;
-  int? uv;
-  double? gustMph;
-  double? gustKph;
+  var pressureMb;
+  var pressureIn;
+  var precipMm;
+  var precipIn;
+  var humidity;
+  var cloud;
+  var feelslikeC;
+  var feelslikeF;
+  var windchillC;
+  var windchillF;
+  var heatindexC;
+  var heatindexF;
+  var dewpointC;
+  var dewpointF;
+  var visKm;
+  var visMiles;
+  var uv;
+  var gustMph;
+  var gustKph;
 
   Current(
       {this.lastUpdatedEpoch,
@@ -145,7 +145,7 @@ class Current {
     tempF = json['temp_f'];
     isDay = json['is_day'];
     condition = json['condition'] != null
-        ? new Condition.fromJson(json['condition'])
+        ? Condition.fromJson(json['condition'])
         : null;
     windMph = json['wind_mph'];
     windKph = json['wind_kph'];
@@ -212,7 +212,7 @@ class Current {
 class Condition {
   String? text;
   String? icon;
-  int? code;
+  var code;
 
   Condition({this.text, this.icon, this.code});
 
@@ -240,7 +240,7 @@ class Forecast {
     if (json['forecastday'] != null) {
       forecastday = <Forecastday>[];
       json['forecastday'].forEach((v) {
-        forecastday!.add(new Forecastday.fromJson(v));
+        forecastday!.add(Forecastday.fromJson(v));
       });
     }
   }
@@ -256,7 +256,7 @@ class Forecast {
 
 class Forecastday {
   String? date;
-  int? dateEpoch;
+  var dateEpoch;
   Day? day;
   Astro? astro;
   List<Hour>? hour;
@@ -266,12 +266,12 @@ class Forecastday {
   Forecastday.fromJson(Map<String, dynamic> json) {
     date = json['date'];
     dateEpoch = json['date_epoch'];
-    day = json['day'] != null ? new Day.fromJson(json['day']) : null;
-    astro = json['astro'] != null ? new Astro.fromJson(json['astro']) : null;
+    day = json['day'] != null ? Day.fromJson(json['day']) : null;
+    astro = json['astro'] != null ? Astro.fromJson(json['astro']) : null;
     if (json['hour'] != null) {
       hour = <Hour>[];
       json['hour'].forEach((v) {
-        hour!.add(new Hour.fromJson(v));
+        hour!.add(Hour.fromJson(v));
       });
     }
   }
@@ -294,26 +294,26 @@ class Forecastday {
 }
 
 class Day {
-  double? maxtempC;
-  double? maxtempF;
-  double? mintempC;
-  double? mintempF;
-  double? avgtempC;
-  double? avgtempF;
-  double? maxwindMph;
-  double? maxwindKph;
-  double? totalprecipMm;
-  double? totalprecipIn;
-  int? totalsnowCm;
-  int? avgvisKm;
-  int? avgvisMiles;
-  int? avghumidity;
-  int? dailyWillItRain;
-  int? dailyChanceOfRain;
-  int? dailyWillItSnow;
-  int? dailyChanceOfSnow;
+  var maxtempC;
+  var maxtempF;
+  var mintempC;
+  var mintempF;
+  var avgtempC;
+  var avgtempF;
+  var maxwindMph;
+  var maxwindKph;
+  var totalprecipMm;
+  var totalprecipIn;
+  var totalsnowCm;
+  var avgvisKm;
+  var avgvisMiles;
+  var avghumidity;
+  var dailyWillItRain;
+  var dailyChanceOfRain;
+  var dailyWillItSnow;
+  var dailyChanceOfSnow;
   Condition? condition;
-  double? uv;
+  var uv;
 
   Day(
       {this.maxtempC,
@@ -357,7 +357,7 @@ class Day {
     dailyWillItSnow = json['daily_will_it_snow'];
     dailyChanceOfSnow = json['daily_chance_of_snow'];
     condition = json['condition'] != null
-        ? new Condition.fromJson(json['condition'])
+        ? Condition.fromJson(json['condition'])
         : null;
     uv = json['uv'];
   }
@@ -396,9 +396,9 @@ class Astro {
   String? moonrise;
   String? moonset;
   String? moonPhase;
-  int? moonIllumination;
-  int? isMoonUp;
-  int? isSunUp;
+  var moonIllumination;
+  var isMoonUp;
+  var isSunUp;
 
   Astro(
       {this.sunrise,
@@ -436,40 +436,40 @@ class Astro {
 }
 
 class Hour {
-  int? timeEpoch;
+  var timeEpoch;
   String? time;
-  double? tempC;
-  double? tempF;
-  int? isDay;
+  var tempC;
+  var tempF;
+  var isDay;
   Condition? condition;
-  double? windMph;
-  double? windKph;
-  int? windDegree;
+  var windMph;
+  var windKph;
+  var windDegree;
   String? windDir;
-  int? pressureMb;
-  double? pressureIn;
-  int? precipMm;
-  int? precipIn;
-  int? snowCm;
-  int? humidity;
-  int? cloud;
-  double? feelslikeC;
-  double? feelslikeF;
-  double? windchillC;
-  double? windchillF;
-  double? heatindexC;
-  double? heatindexF;
-  double? dewpointC;
-  double? dewpointF;
-  int? willItRain;
-  int? chanceOfRain;
-  int? willItSnow;
-  int? chanceOfSnow;
-  int? visKm;
-  int? visMiles;
-  double? gustMph;
-  double? gustKph;
-  double? uv;
+  var pressureMb;
+  var pressureIn;
+  var precipMm;
+  var precipIn;
+  var snowCm;
+  var humidity;
+  var cloud;
+  var feelslikeC;
+  var feelslikeF;
+  var windchillC;
+  var windchillF;
+  var heatindexC;
+  var heatindexF;
+  var dewpointC;
+  var dewpointF;
+  var willItRain;
+  var chanceOfRain;
+  var willItSnow;
+  var chanceOfSnow;
+  var visKm;
+  var visMiles;
+  var gustMph;
+  var gustKph;
+  var uv;
 
   Hour(
       {this.timeEpoch,
@@ -514,7 +514,7 @@ class Hour {
     tempF = json['temp_f'];
     isDay = json['is_day'];
     condition = json['condition'] != null
-        ? new Condition.fromJson(json['condition'])
+        ? Condition.fromJson(json['condition'])
         : null;
     windMph = json['wind_mph'];
     windKph = json['wind_kph'];

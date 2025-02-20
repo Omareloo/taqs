@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:taqs/config/extentions/extention.dart';
+import 'package:taqs/config/style/app_color.dart';
+import '../../../../config/style/text_styles.dart';
 import '../manager/weather_cubit/cubit.dart';
 import '../manager/weather_cubit/states.dart';
 
@@ -9,29 +12,23 @@ class AttributesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<WeatherCubit>();
+    final cubit = BlocProvider.of<WeatherCubit>(context);
     return BlocBuilder<WeatherCubit, WeatherState>(
-      builder: (context,state) {
-        if (state is WeatherLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else if (state is WeatherSuccess) {
-          final forecastDays = state.weatherEntity.forecast?.forecastday??[];
-          final selectedDayIndex = cubit.selectedDayIndex;
-          final selectedDay = forecastDays[selectedDayIndex];
+      builder: (context, state) {
+        final selectedDayIndex = cubit.selectedDayIndex;
+        if (state is WeatherSuccess) {
+          final selectedDay = state.weatherModel.forecast!.forecastday![selectedDayIndex];
           return Column(
             children: [
               Container(
-                height: 50,
+                height: 50.h,
                 width: double.infinity,
-                decoration: BoxDecoration
-                  (
+                decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16.0),
-                  color: Colors.white,
+                  color: AppColor.white,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withValues(),
+                      color: AppColor.lightGrey,
                       spreadRadius: 5,
                       blurRadius: 7,
                       offset: const Offset(0, 3), // changes position of shadow
@@ -40,27 +37,29 @@ class AttributesWidget extends StatelessWidget {
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children:
-                  [
-                    const Text('Temperature :', style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18.0),),
-                    const SizedBox(height: 8.0,),
-                     Text('${selectedDay.day?.avgtempC} C', style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18),),
+                  children: [
+                    Text(
+                      'Temperature :',
+                      style: AppTextStyle.font18black700,
+                    ),
+                    8.ws,
+                    Text(
+                      '${selectedDay.day!.avgtempC} C',
+                     style: AppTextStyle.font18black700,
+                    ),
                   ],
                 ),
               ),
-              SizedBox(height: 16,),
+              16.hs,
               Container(
-                height: 50,
+                height: 50.h,
                 width: double.infinity,
-                decoration: BoxDecoration
-                  (
+                decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16.0),
-                  color: Colors.white,
+                  color: AppColor.white,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withValues(),
+                      color: AppColor.lightGrey,
                       spreadRadius: 5,
                       blurRadius: 7,
                       offset: const Offset(0, 3), // changes position of shadow
@@ -69,27 +68,29 @@ class AttributesWidget extends StatelessWidget {
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children:
-                  [
-                    const Text('Max Temperature :', style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18.0),),
-                    const SizedBox(height: 8.0,),
-                    Text('${selectedDay.day?.maxtempC} C', style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18),),
+                  children: [
+                    Text(
+                      'Max Temperature :',
+                     style: AppTextStyle.font18black700,
+                    ),
+                    8.ws,
+                    Text(
+                      '${selectedDay.day!.maxtempC} C',
+                      style: AppTextStyle.font18black700,
+                    ),
                   ],
                 ),
               ),
-              SizedBox(height: 16,),
+              16.hs,
               Container(
-                height: 50,
+                height: 50.h,
                 width: double.infinity,
-                decoration: BoxDecoration
-                  (
+                decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16.0),
-                  color: Colors.white,
+                  color: AppColor.white,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withValues(),
+                      color: AppColor.lightGrey,
                       spreadRadius: 5,
                       blurRadius: 7,
                       offset: const Offset(0, 3), // changes position of shadow
@@ -98,27 +99,29 @@ class AttributesWidget extends StatelessWidget {
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children:
-                  [
-                    const Text('Max Wind Speed:', style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18.0),),
-                    const SizedBox(height: 8.0,),
-                    Text("${selectedDay.day?.maxwindKph} KPH", style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18),),
+                  children: [
+                    Text(
+                      'Max Wind Speed:',
+                      style: AppTextStyle.font18black700,
+                    ),
+                    8.ws,
+                    Text(
+                      "${selectedDay.day!.maxwindKph} KPH",
+                     style: AppTextStyle.font18black700,
+                    ),
                   ],
                 ),
               ),
-              SizedBox(height: 16,),
+              16.hs,
               Container(
-                height: 50,
+                height: 50.h,
                 width: double.infinity,
-                decoration: BoxDecoration
-                  (
+                decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16.0),
-                  color: Colors.white,
+                  color: AppColor.white,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withValues(),
+                      color: AppColor.lightGrey,
                       spreadRadius: 5,
                       blurRadius: 7,
                       offset: const Offset(0, 3), // changes position of shadow
@@ -127,21 +130,26 @@ class AttributesWidget extends StatelessWidget {
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children:
-                  [
-                    const Text('Chance Of Rain :', style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18.0),),
-                    const SizedBox(height: 8.0,),
-                     Text('${selectedDay.day?.dailyChanceOfRain} ', style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18),),
+                  children: [
+                    Text(
+                      'Chance Of Rain :',
+                      style: AppTextStyle.font18black700,
+                    ),
+                    8.ws,
+                    Text(
+                      '${selectedDay.day!.dailyChanceOfRain} %',
+                      style: AppTextStyle.font18black700,
+                    ),
                   ],
                 ),
               ),
-              SizedBox(height: 16,),
+              16.hs,
             ],
           );
+        } else {
+          return const SizedBox();
         }
-        return SizedBox();
-      });
+      },
+    );
   }
 }
