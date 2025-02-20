@@ -9,6 +9,9 @@ class AppTextStyle {
 
   static final TextStyle _fontSize24 = TextStyle(fontSize: 24.sp);
 
+  static final TextStyle _fontSize18 = TextStyle(fontSize: 18.sp);
+
+
   static final TextStyle _fontSize16 = TextStyle(fontSize: 16.sp);
 
   static final TextStyle _fontSize14 = TextStyle(fontSize: 14.sp);
@@ -49,6 +52,12 @@ class AppTextStyle {
   static TextStyle font24black700 = _fontCairo
       .merge(_fontWeight700)
       .merge(_fontSize24)
+      .merge(_fontWeightBold)
+      .copyWith(color: AppColor.black);
+
+  static TextStyle font18black700 = _fontCairo
+      .merge(_fontWeight700)
+      .merge(_fontSize18)
       .merge(_fontWeightBold)
       .copyWith(color: AppColor.black);
 

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:taqs/config/extentions/extention.dart';
 import 'package:taqs/config/style/text_styles.dart';
-
-import 'features/auth/presentation/pages/login_screen.dart';
+import 'package:taqs/features/home/presentation/pages/inputs_screen.dart';
 
 
 
@@ -99,7 +98,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     {
                       Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(builder: (context)=>LoginScreen()),
+                          MaterialPageRoute(builder: (context)=>InputScreen()),
                               (route) => false
                       );
                     }

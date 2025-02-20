@@ -6,6 +6,7 @@ import 'package:taqs/features/home/presentation/widgets/attributes_widget.dart';
 import 'package:taqs/features/home/presentation/widgets/days_widget.dart';
 import '../../../../db_injection.dart';
 
+
 class HomeScreen extends StatefulWidget {
 
   const HomeScreen({super.key});
@@ -15,17 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-  final TextEditingController locationController = TextEditingController();
-
-
-
-  @override
-  void dispose() {
-    locationController.dispose();
-    super.dispose();
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -43,18 +33,28 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         body: BlocBuilder<WeatherCubit,WeatherState>(
-          builder: (context,state)=> Padding(
+          builder: (context,state){
+            if (state is WeatherLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is WeatherSuccess) {
+            return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                //create dropdown with list of cities
-
                 DaysWidget(),
                 Spacer(),
                 AttributesWidget()
               ],
-            ),
-          ),
+            ));
+            } else if (state is WeatherFailure) {
+              return Center(
+                child: Text('Error: ${state.errorMessage}'),
+              );
+            }
+            return SizedBox();
+      }
         ),
       ),
     );

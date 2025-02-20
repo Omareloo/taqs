@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:taqs/config/style/app_color.dart';
 import 'package:taqs/features/home/presentation/manager/weather_cubit/cubit.dart';
 import '../manager/weather_cubit/states.dart';
 
@@ -14,63 +16,71 @@ class DaysWidget extends StatefulWidget {
 class _DaysWidgetState extends State<DaysWidget> {
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<WeatherCubit>();
+    final cubit = BlocProvider.of<WeatherCubit>(context);
     return BlocBuilder<WeatherCubit, WeatherState>(builder: (context, state) {
-      final selectedDayIndex = cubit.selectedDayIndex;
       if (state is WeatherLoading) {
         return const Center(
           child: CircularProgressIndicator(),
         );
       } else if (state is WeatherSuccess) {
-        final forecastDays = state.weatherEntity.forecast?.forecastday??[];
+        final forecastDays = state.weatherModel.forecast?.forecastday??[];
         return SizedBox(
-          height: 100,
+          height: 100.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: forecastDays.length,
             itemBuilder: (context, index) {
-              final isSelected = index == selectedDayIndex;
+              final day = forecastDays[index];
               return GestureDetector(
                 onTap: () {
                   cubit.setDayIndex(index);
-                },
-                child: Container(
-                  width: 100,
-                  margin: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    color: isSelected ? Colors.blue : Colors.grey[300],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                      Jiffy.parse(forecastDays[index].date??"").E,
-                        style: TextStyle(
-                          color: isSelected ? Colors.white : Colors.black,
-                          fontWeight: FontWeight.bold,
+                  },
+                child: BlocBuilder<WeatherCubit, WeatherState>(
+                  builder: (context, state) {
+                    final isSelected = cubit.selectedDayIndex == index;
+                    return Container(
+                      width: 100.w,
+                      margin: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        color: isSelected ? AppColor.blue : AppColor.lightGrey,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              Jiffy
+                                  .parse(day.date ?? "")
+                                  .E,
+                              style: TextStyle(
+                                color: isSelected ? AppColor.white : AppColor.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              DateTime
+                                  .tryParse(day.date ?? "")
+                                  ?.day
+                                  .toString() ??
+                                  "",
+                              style: TextStyle(
+                                color: isSelected ? AppColor.white : AppColor.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      const SizedBox(height: 8),
-                      Text(
-                        DateTime.tryParse(forecastDays[index].date??"")
-                                ?.day
-                                .toString() ??
-                            "",
-                        style: TextStyle(
-                          color: isSelected ? Colors.white : Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                    );
+                  })
               );
             },
           ),
         );
       }
-      return SizedBox();
+      return const SizedBox();
     });
   }
 }

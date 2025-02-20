@@ -7,6 +7,7 @@ import 'package:taqs/features/auth/presentation/manager/login_cubit/cubit.dart';
 import 'package:taqs/features/auth/presentation/manager/login_cubit/state.dart';
 import 'package:taqs/features/auth/presentation/pages/register_screen.dart';
 import 'package:taqs/features/auth/presentation/widgets/button/button.dart';
+import 'package:taqs/features/home/presentation/pages/inputs_screen.dart';
 import '../../../../db_injection.dart';
 import '../../../home/presentation/pages/home_screen.dart';
 import '../widgets/fields/email.dart';
@@ -24,7 +25,7 @@ class LoginScreen extends StatelessWidget {
           listener: (context, state) {
             if (state is SignInSuccess) {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                  context, MaterialPageRoute(builder: (context) => InputScreen()));
             }
             if(state is SignInError)
             {

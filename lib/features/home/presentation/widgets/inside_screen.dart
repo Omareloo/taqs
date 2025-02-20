@@ -8,7 +8,7 @@ class InsideScreen extends StatelessWidget {
     return Column(
       children:
       [
-        Text('',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),),
+
       ],
     );
   }
