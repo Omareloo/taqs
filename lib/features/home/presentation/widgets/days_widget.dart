@@ -1,0 +1,86 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:jiffy/jiffy.dart';
+import 'package:taqs/config/style/app_color.dart';
+import 'package:taqs/features/home/presentation/manager/weather_cubit/cubit.dart';
+import '../manager/weather_cubit/states.dart';
+
+class DaysWidget extends StatefulWidget {
+  const DaysWidget({super.key});
+
+  @override
+  State<DaysWidget> createState() => _DaysWidgetState();
+}
+
+class _DaysWidgetState extends State<DaysWidget> {
+  @override
+  Widget build(BuildContext context) {
+    final cubit = BlocProvider.of<WeatherCubit>(context);
+    return BlocBuilder<WeatherCubit, WeatherState>(builder: (context, state) {
+      if (state is WeatherLoading) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      } else if (state is WeatherSuccess) {
+        final forecastDays = state.weatherModel.forecast?.forecastday??[];
+        return SizedBox(
+          height: 100.h,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: forecastDays.length,
+            itemBuilder: (context, index) {
+              final day = forecastDays[index];
+              return GestureDetector(
+                onTap: () {
+                  cubit.setDayIndex(index);
+                  },
+                child: BlocBuilder<WeatherCubit, WeatherState>(
+                  builder: (context, state) {
+                    final isSelected = cubit.selectedDayIndex == index;
+                    return Container(
+                      width: 100.w,
+                      margin: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        color: isSelected ? AppColor.blue : AppColor.lightGrey,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              Jiffy
+                                  .parse(day.date ?? "")
+                                  .E,
+                              style: TextStyle(
+                                color: isSelected ? AppColor.white : AppColor.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              DateTime
+                                  .tryParse(day.date ?? "")
+                                  ?.day
+                                  .toString() ??
+                                  "",
+                              style: TextStyle(
+                                color: isSelected ? AppColor.white : AppColor.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  })
+              );
+            },
+          ),
+        );
+      }
+      return const SizedBox();
+    });
+  }
+}

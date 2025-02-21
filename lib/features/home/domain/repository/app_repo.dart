@@ -1,0 +1,33 @@
+import 'package:dio/dio.dart';
+
+import '../../../../config/network/dio.dart';
+import '../../data/models/weather_model.dart';
+import '../../data/repository/app_repository.dart';
+
+class ImplWeatherRepository extends WeatherRepository {
+  @override
+  Future<WeatherModel> getWeatherData(String location, int days) async {
+    try {
+      final query = {
+        'key': 'c444ec3251a44159af2142146251602', // Replace with your actual API key
+        'q': location,
+        'days': days,
+      };
+      print('API Request URL: forecast.json'); // Debugging
+      print('API Request Query: $query'); // Debugging
+
+      final response = await DioHelper.getData(
+        url: 'forecast.json',
+        query: query,
+      );
+
+      print('API Response Status Code: ${response.statusCode}'); // Debugging
+      print('API Response Data: ${response.data}'); // Debugging
+
+      return WeatherModel.fromJson(response.data);
+    } on DioException catch (e) {
+      print('Error in repository: $e'); // Debugging
+      throw Exception('Failed to load weather data');
+    }
+  }
+}
