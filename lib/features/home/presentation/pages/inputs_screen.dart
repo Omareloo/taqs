@@ -21,7 +21,7 @@ class _InputScreenState extends State<InputScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create:   (context,) => WeatherCubit(sl()) ,
+      create:   (context,) => WeatherCubit(sl(),sl(),sl()) ,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Taqss - Input'),

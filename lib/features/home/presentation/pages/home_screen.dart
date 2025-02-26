@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taqs/features/home/presentation/manager/weather_cubit/cubit.dart';
 import 'package:taqs/features/home/presentation/manager/weather_cubit/states.dart';
+import 'package:taqs/features/home/presentation/widgets/predict_widget.dart';
 import 'package:taqs/features/home/presentation/widgets/attributes_widget.dart';
 import 'package:taqs/features/home/presentation/widgets/days_widget.dart';
 import '../../../../db_injection.dart';
@@ -20,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => WeatherCubit(sl()),
+      create: (context) => WeatherCubit(sl(),sl(),sl()),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Taqss',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),),
@@ -44,6 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               children: [
                 DaysWidget(),
+                Spacer(),
+                PredictWidget(),
                 Spacer(),
                 AttributesWidget()
               ],

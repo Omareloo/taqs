@@ -14,7 +14,9 @@ class WeatherModel {
     forecast = json['forecast'] != null
         ? Forecast.fromJson(json['forecast'])
         : null;
+
   }
+
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -30,7 +32,6 @@ class WeatherModel {
     return data;
   }
 }
-
 class Location {
   String? name;
   String? region;
@@ -232,8 +233,8 @@ class Condition {
 }
 
 class Forecast {
-  List<Forecastday>? forecastday;
 
+  List<Forecastday>? forecastday;
   Forecast({this.forecastday});
 
   Forecast.fromJson(Map<String, dynamic> json) {
