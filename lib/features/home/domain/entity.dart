@@ -1,4 +1,4 @@
-
+import '../../../config/constant/constant.dart';
 import '../data/models/weather_model.dart';
 
 class WeatherFeatures {
@@ -13,7 +13,6 @@ class WeatherFeatures {
   }
 
   static List<int> getWeatherFeatures(WeatherModel weather, {Forecastday? forecastDay}) {
-    List<int> features = [0, 0, 0, 0, 0];
 
     Current? current = weather.current;
     if (forecastDay != null) {

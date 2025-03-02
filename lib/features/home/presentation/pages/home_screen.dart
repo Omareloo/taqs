@@ -33,7 +33,30 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        body: BlocBuilder<WeatherCubit,WeatherState>(
+        body: BlocConsumer<WeatherCubit,WeatherState>(
+          listener: (context,state)
+          {
+            if (state is WeatherFailure) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.errorMessage),
+                ));
+          }
+            if (state is GeneratedListFailure)
+            {
+              ScaffoldMessenger.of(context).showSnackBar
+                (
+                SnackBar(
+                  content: Text(state.errorMessage),
+              )
+              );
+            }
+            if (state is PredictionFailure) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Error: ${state.errorMessage}')),
+              );
+            }
+            },
           builder: (context,state){
             if (state is WeatherLoading) {
               return const Center(
@@ -51,10 +74,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 AttributesWidget()
               ],
             ));
-            } else if (state is WeatherFailure) {
-              return Center(
-                child: Text('Error: ${state.errorMessage}'),
-              );
             }
             return SizedBox();
       }
