@@ -11,7 +11,8 @@ class WeatherLoading extends WeatherState {}
 
 class WeatherSuccess extends WeatherState {
   final WeatherModel weatherModel;
-  WeatherSuccess(this.weatherModel);
+  final List<int> prediction;
+  WeatherSuccess(this.weatherModel, this.prediction);
 }
 
 class WeatherFailure extends WeatherState {

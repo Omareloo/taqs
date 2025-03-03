@@ -1,18 +1,19 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
-import 'package:taqs/features/home/data/repository/prediction_repository.dart';
+import 'package:http/http.dart' as http;
+import '../../data/repository/prediction_repository.dart';
 
-class ImplPredictionRepository extends PredictionRepository {
-
-  ImplPredictionRepository();
-
+class ImplPredictionRepository implements PredictionRepository {
   @override
-  Future<int> getPrediction(List<int> features) async {
+  Future<List<int>> getPrediction(List<int> features) async {
     final url = Uri.parse('http://192.168.1.9:5001/predict');
-    Map<String, dynamic> body = {'features': features};
+    final Map<String, dynamic> body = {'features': features};
 
     try {
+      if (kDebugMode) {
+        print('Sending request to: $url');
+        print('Request body: $body');
+      }
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
@@ -20,23 +21,23 @@ class ImplPredictionRepository extends PredictionRepository {
       );
 
       if (response.statusCode == 200) {
-        final responseData = json.decode(response.body);
-        final prediction = responseData['prediction'];
+        final Map<String, dynamic> data = json.decode(response.body);
+        final List<dynamic> predictionList = data['prediction'];
+        final List<int> prediction = predictionList.map((e) => e as int).toList();
         if (kDebugMode) {
           print('Prediction: $prediction');
         }
-        return prediction as int; // Cast to int
+        return prediction; // Return the prediction
       } else {
         if (kDebugMode) {
           print('Failed to get prediction: ${response.statusCode}');
         }
-        throw Exception('Failed to get prediction: ${response.statusCode}'); // Throw an exception
       }
     } catch (e) {
       if (kDebugMode) {
-        print('Error during prediction request: $e');
+        print('An error occurred: $e');
       }
-      throw Exception('Error during prediction request: $e'); // Throw an exception
     }
+    return [];
   }
 }

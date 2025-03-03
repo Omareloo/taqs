@@ -1,11 +1,11 @@
 import '../../data/repository/prediction_repository.dart';
 
 class GetPredictionUseCase {
-  final PredictionRepository predictionRepository;
+  final PredictionRepository repository;
 
-  GetPredictionUseCase(this.predictionRepository);
+  GetPredictionUseCase(this.repository);
 
-  Future<int> getPrediction(List<int> features) async {
-    return await predictionRepository.getPrediction(features);
+  Future<List<int>> getPrediction(List<int> parameters) async {
+    return await repository.getPrediction(parameters);
   }
 }

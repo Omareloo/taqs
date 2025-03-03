@@ -6,7 +6,7 @@ class GenerateListUseCase {
   final GenerateListRepo repository;
   GenerateListUseCase(this.repository);
 
-  Future<List<int>> generateFeatures(WeatherModel weather) async {
-    return await repository.generateFeatures(weather);
+  Future<List<int>> generate(WeatherModel weather) async {
+    return await repository.generateList(weather);
   }
 }

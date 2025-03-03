@@ -1,3 +1,3 @@
 abstract class PredictionRepository {
-  Future<int> getPrediction(List<int> features);
+  Future<List<int>> getPrediction(List<int> features);
 }
