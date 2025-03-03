@@ -9,7 +9,7 @@ class ImplPredictionRepository extends PredictionRepository {
 
   @override
   Future<int> getPrediction(List<int> features) async {
-    final url = Uri.parse('http://10.0.2.2:5001/predict');
+    final url = Uri.parse('http://192.168.1.9:5001/predict');
     Map<String, dynamic> body = {'features': features};
 
     try {

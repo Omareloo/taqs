@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:taqs/config/constant/constant.dart';
 import 'package:taqs/config/extentions/extention.dart';
 import 'package:taqs/config/style/text_styles.dart';
 import '../manager/weather_cubit/cubit.dart';
@@ -20,7 +21,7 @@ class PredictWidget extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                WeatherCubit.get(context).getPrediction();
+                WeatherCubit.get(context).getPrediction(features);
               },
               child: const Text('Get Prediction'),
             ),
